@@ -10,7 +10,7 @@ Management and results monitoring application for local FIFA tournaments. Useful
 ## Technologies 🔧
 
 * Java Spring Boot
-* Thymeleaf engine
+* Thymeleaf template engine
 * MySQL database
 
 
