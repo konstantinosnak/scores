@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Player</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.rtl.min.css" integrity="sha512-SRg0d/3qeXy0utrb7F4+4jkFHhzdyvqjAd2i9ub0zWrPS80PoRaAtzmbMeVRYtApxoEcE6tcFZaHRY5UbwrTaw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            background-color: darkgreen;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        .down {
+            margin-top: 220px;
+            flex-grow: 1;
+        }
+
+        .custom-w {
+            width: 200px;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<header class="fixed-top w-100">
+    <div th:replace="fragments/header :: header"></div>
+</header>
+
+<div class="container down">
+    <div class="text-center">
+        <h1 class="mb-4 text-white">
+            <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+            Use the dropdown list to choose a player!
+
+        </h1>
+
+        <form class="mx-auto" th:object="${selectedPlayer}" th:action="@{/players/selected/{id}(id=${selectedPlayer.playerId})}" method="post">
+            <div class="mb-3">
+                <label for="selectedPlayerId" class="form-label text-white ">Select a Player:</label>
+                <select id="selectedPlayerId" class="form-select custom-w mx-auto" th:field="*{playerId}">
+                    <option th:each="player : ${players}" th:value="${player?.playerId}" th:text="${player?.playerName}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-dark">View Selected Player</button>
+        </form>
+
+        <a th:href="@{/players}" class="btn btn-secondary mt-3">Back to All Players</a>
+    </div>
+
+</div>
+<footer class="mt-auto w-100">
+    <div  th:replace="fragments/footer :: footer"></div>
+</footer>
+</body>
+</html>
